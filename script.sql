@@ -181,3 +181,134 @@ main:BEGIN
 END main$$
 
 DELIMITER ;
+
+--8
+
+DROP PROCEDURE IF EXISTS borrarinactivos;
+
+DELIMITER $$
+
+CREATE PROCEDURE borrarinactivos()
+
+main:BEGIN
+
+DELETE FROM usuarios WHERE activo = 0;
+    
+END main $$
+
+DELIMITER ;
+
+--9
+
+DROP PROCEDURE IF EXISTS promediokia;
+
+DELIMITER $$
+
+CREATE PROCEDURE promediokia()
+
+main:BEGIN
+
+SELECT AVG(saldo) FROM usuarios WHERE marca = "NOKIA";
+
+END MAIN$$
+
+DEMITER ;
+
+--10
+
+DROP PROCEDURE IF EXISTS ordenmarcas;
+
+DELIMITER $$
+
+CREATE PROCEDURE ordenmarcas()
+
+main:BEGIN
+
+SELECT marca FROM usuarios GROUP BY marca ORDER BY marca DESC;
+
+END main $$
+
+DELIMITER ; 
+
+--11
+
+DROP PROCEDURE IF EXISTS generos;
+
+DELIMITER $$
+
+CREATE PROCEDURE generos()
+
+main:BEGIN
+
+SELECT sexo, COUNT(sexo) FROM usuarios GROUP BY sexo;
+
+
+END main $$
+
+DELIMITER ; 
+
+--12
+
+DROP PROCEDURE IF EXISTS inactivos;
+
+DELIMITER $$
+
+CREATE PROCEDURE inactivos()
+
+main:BEGIN
+
+SELECT idx, usuario, nombre FROM usuarios WHERE activo = 0;
+
+END main $$
+
+DELIMITER ; 
+
+--13
+
+DROP PROCEDURE IF EXISTS iusasaldo;
+
+DELIMITER $$
+
+CREATE PROCEDURE iusasaldo()
+
+main:BEGIN
+
+SELECT SUM(saldo) FROM usuarios WHERE compañia = "IUSACELL";
+
+END main $$
+
+DELIMITER ; 
+
+--14
+
+DROP PROCEDURE IF EXISTS sinsaldo;
+
+DELIMITER $$
+
+CREATE PROCEDURE sinsaldo()
+
+main:BEGIN
+
+SELECT telefono FROM usuarios WHERE saldo = 0;
+
+END main $$
+
+DELIMITER ; 
+
+--15
+
+DROP PROCEDURE IF EXISTS seleccionmail;
+
+DELIMITER $$
+
+CREATE PROCEDURE seleccionmail(
+
+mail VARCHAR(20)
+
+)
+
+main:BEGIN
+
+SELECT usuario, mail, telefono FROM usuarios WHERE email = mail;
+
+END main $$
