@@ -312,3 +312,28 @@ main:BEGIN
 SELECT usuario, mail, telefono FROM usuarios WHERE email = mail;
 
 END main $$
+
+--EJ 16
+DROP VIEW IF EXISTS usuariosinactivos;
+
+CREATE VIEW usuariosinactivos AS
+    SELECT usuario, nombre FROM usuarios WHERE saldo =0 AND activo = 0 
+;
+--EJ17
+DROP VIEW IF EXISTS motorolanokia;
+
+CREATE VIEW motorolanokia AS
+   SELECT nombre, telefono FROM usuarios WHERE marca != 'NOKIA' and marca != 'MOTOROLA'
+;
+
+--EJ18
+DROP PROCEDURE IF EXISTS saldoregalo ;
+
+DELIMITER //
+
+CREATE PROCEDURE saldoregalo ()
+main:BEGIN
+	UPDATE usuarios SET saldo = '100' WHERE	saldo = 0 
+END main//
+
+DELIMITER ;
